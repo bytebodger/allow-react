@@ -1,5 +1,6 @@
 import { allow as core } from '@toolz/allow';
 import React from 'react';
+import { isARegularObject } from '@toolz/is-a-regular-object-react';
 
 const Allow = () => {
    const anArrayOfObjects = (value, minLength = 0, maxLength = Number.MAX_SAFE_INTEGER) => {
@@ -31,7 +32,7 @@ const Allow = () => {
       core.anInteger(minNumberOfKeys, is.not.negative).anInteger(maxNumberOfKeys, is.not.negative);
       if (React.isValidElement(value))
          return core.fail(value, 'is a React element');
-      if (!isAnObject(value))
+      if (!isARegularObject(value))
          return core.fail(value, 'is not an object');
       core.checkLength(Object.keys(value), minNumberOfKeys, maxNumberOfKeys);
       return allow;
@@ -44,13 +45,11 @@ const Allow = () => {
    };
    
    const is = {not: {negative: 0}};
-   
-   const isAnObject = value => typeof value === 'object' && !Array.isArray(value) && value !== null;
-   
+
    const oneOf = (value, allowedValues) => {
       if (core.getAllowNull() && value === null)
          return allow;
-      if (isAnObject(value) || Array.isArray(value) || typeof value === 'function' || React.isValidElement(value)) {
+      if (isARegularObject(value) || Array.isArray(value) || typeof value === 'function' || React.isValidElement(value)) {
          core.fail(value, 'cannot be an object, array, function, or a React element');
          return allow;
       }
