@@ -1,6 +1,6 @@
 {
   "name": "@toolz/allow-react",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Extends @toolz/allow to provide validation of React elements",
   "keywords": [
     "data type",

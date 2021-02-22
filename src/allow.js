@@ -2,12 +2,38 @@ import { allow as core } from '@toolz/allow';
 import React from 'react';
 
 const Allow = () => {
+   const anArrayOfObjects = (value, minLength = 0, maxLength = Number.MAX_SAFE_INTEGER) => {
+      core.anArray(value).anInteger(minLength, is.not.negative).anInteger(maxLength, is.not.negative);
+      if (core.getAllowNull() && value === null)
+         return allow;
+      let reactElementFound = false;
+      value.forEach(item => {
+         if (reactElementFound)
+            return;
+         if (React.isValidElement(item))
+            return core.fail(item, 'is a React element');
+         core.anObject(item);
+      });
+      core.checkLength(value, minLength, maxLength);
+      return allow;
+   };
+   
    const anArrayOfReactElements = (value, minLength = 0, maxLength = Number.MAX_SAFE_INTEGER) => {
       core.anArray(value).anInteger(minLength, is.not.negative).anInteger(maxLength, is.not.negative);
       if (core.getAllowNull() && value === null)
          return allow;
-      value.forEach(item => core.anInteger(item));
+      value.forEach(item => aReactElement(item));
       core.checkLength(value, minLength, maxLength);
+      return allow;
+   };
+   
+   const anObject = (value, minNumberOfKeys = 0, maxNumberOfKeys = Number.MAX_SAFE_INTEGER) => {
+      core.anInteger(minNumberOfKeys, is.not.negative).anInteger(maxNumberOfKeys, is.not.negative);
+      if (React.isValidElement(value))
+         return core.fail(value, 'is a React element');
+      if (!isAnObject(value))
+         return core.fail(value, 'is not an object');
+      core.checkLength(Object.keys(value), minNumberOfKeys, maxNumberOfKeys);
       return allow;
    };
    
@@ -19,6 +45,30 @@ const Allow = () => {
    
    const is = {not: {negative: 0}};
    
+   const isAnObject = value => typeof value === 'object' && !Array.isArray(value) && value !== null;
+   
+   const oneOf = (value, allowedValues) => {
+      if (core.getAllowNull() && value === null)
+         return allow;
+      if (isAnObject(value) || Array.isArray(value) || typeof value === 'function' || React.isValidElement(value)) {
+         core.fail(value, 'cannot be an object, array, function, or a React element');
+         return allow;
+      }
+      if (React.isValidElement(value) || typeof allowedValues !== 'object' || allowedValues === null) {
+         core.fail(allowedValues, 'allowedValues must be supplied in an object or an array');
+         return allow;
+      }
+      if (Array.isArray(allowedValues)) {
+         if (!allowedValues.some(allowedValue => value === allowedValue))
+            return core.fail(value, 'is not an allowed value');
+         return allow;
+      }
+      const entries = Object.entries(allowedValues);
+      if (!entries.some(entry => entry[1] === value))
+         return core.fail(value, 'is not an allowed value');
+      return allow;
+   };
+   
    return {
       aBoolean: core.aBoolean,
       aFunction: core.aFunction,
@@ -27,19 +77,19 @@ const Allow = () => {
       anArrayOfInstances: core.anArrayOfInstances,
       anArrayOfIntegers: core.anArrayOfIntegers,
       anArrayOfNumbers: core.anArrayOfNumbers,
-      anArrayOfObjects: core.anArrayOfObjects,
+      anArrayOfObjects,
       anArrayOfReactElements,
       anArrayOfStrings: core.anArrayOfStrings,
       anInstanceOf: core.anInstanceOf,
       anInteger: core.anInteger,
-      anObject: core.anObject,
+      anObject,
       aNumber: core.aNumber,
       aReactElement,
       aString: core.aString,
       getAllowNull: core.getAllowNull,
       getFailureBehavior: core.getFailureBehavior,
       getOnFailure: core.getOnFailure,
-      oneOf: core.oneOf,
+      oneOf,
       setAllowNull: core.setAllowNull,
       setOnFailure: core.setOnFailure,
       setFailureBehavior: core.setFailureBehavior,

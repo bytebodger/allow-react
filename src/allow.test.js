@@ -49,6 +49,15 @@ const anArrayOfMixedTypes = ['string', {}, 42, 3.14, ['fee', 'fie', {}], {uno: '
 const anArrayOfNumbers = [-3, 3.14, 42, 99.99];
 const anArrayOfObjects = [{one: 1, two: 2}, {three: 3, four: 4}, {five: 5, six: 6}, {}];
 const anArrayOfPeople = [{first: 'joe', last: 'smith', middle: 'bob'}, {first: 'mary', last: 'smits', middle: 'jane'}, {first: 'rik', last: 'tik', middle: 'tok'}];
+const anArrayOfReactElements = [<>
+   <div>fee</div>
+</>, <>
+   <div>fie</div>
+</>, <>
+   <div>foe</div>
+</>, <>
+   <div>fum</div>
+</>];
 const anArrayOfStrings = ['one', 'two', 'three'];
 const aNegative1 = -1;
 const aNegativePi = -3.14;
@@ -62,6 +71,9 @@ const aNumber1WithDecimals = 1.00;
 const anUndefined = undefined;
 const aPi = 3.14;
 const aPopulatedObject = {all: 'for', one: 'and', none: 'for', paul: ''};
+const aReactElement = <>
+   <div>foo</div>
+</>;
 const aTrue = true;
 const aTrueString = 'true';
 
@@ -108,6 +120,7 @@ test('aBoolean() should throw an error when checking anything other than a Boole
    expect(() => allow.aBoolean(anArrayOfNumbers)).toThrow();
    expect(() => allow.aBoolean(anArrayOfObjects)).toThrow();
    expect(() => allow.aBoolean(anArrayOfPeople)).toThrow();
+   expect(() => allow.aBoolean(anArrayOfReactElements)).toThrow();
    expect(() => allow.aBoolean(anArrayOfStrings)).toThrow();
    expect(() => allow.aBoolean(aNegative1)).toThrow();
    expect(() => allow.aBoolean(aNegativePi)).toThrow();
@@ -121,6 +134,7 @@ test('aBoolean() should throw an error when checking anything other than a Boole
    expect(() => allow.aBoolean(anUndefined)).toThrow();
    expect(() => allow.aBoolean(aPi)).toThrow();
    expect(() => allow.aBoolean(aPopulatedObject)).toThrow();
+   expect(() => allow.aBoolean(aReactElement)).toThrow();
    expect(() => allow.aBoolean(aTrueString)).toThrow();
 });
 
@@ -146,6 +160,7 @@ test('aFunction() should throw an error when checking anything other than a func
    expect(() => allow.aFunction(anArrayOfNumbers)).toThrow();
    expect(() => allow.aFunction(anArrayOfObjects)).toThrow();
    expect(() => allow.aFunction(anArrayOfPeople)).toThrow();
+   expect(() => allow.aFunction(anArrayOfReactElements)).toThrow();
    expect(() => allow.aFunction(anArrayOfStrings)).toThrow();
    expect(() => allow.aFunction(aNegative1)).toThrow();
    expect(() => allow.aFunction(aNegativePi)).toThrow();
@@ -159,6 +174,7 @@ test('aFunction() should throw an error when checking anything other than a func
    expect(() => allow.aFunction(anUndefined)).toThrow();
    expect(() => allow.aFunction(aPi)).toThrow();
    expect(() => allow.aFunction(aPopulatedObject)).toThrow();
+   expect(() => allow.aFunction(aReactElement)).toThrow();
    expect(() => allow.aFunction(aTrue)).toThrow();
    expect(() => allow.aFunction(aTrueString)).toThrow();
 });
@@ -172,6 +188,7 @@ test('anArray() should pass when checking any array', () => {
    expect(allow.anArray(anArrayOfNumbers)).toEqual(expect.any(Object));
    expect(allow.anArray(anArrayOfObjects)).toEqual(expect.any(Object));
    expect(allow.anArray(anArrayOfPeople)).toEqual(expect.any(Object));
+   expect(allow.anArray(anArrayOfReactElements)).toEqual(expect.any(Object));
    expect(allow.anArray(anArrayOfStrings)).toEqual(expect.any(Object));
    expect(allow.anArray(anEmptyArray)).toEqual(expect.any(Object));
 });
@@ -189,6 +206,7 @@ test('anArray() should pass when checking arrays that meet a minimum length', ()
    expect(allow.anArray(anArrayOfNumbers, 1)).toEqual(expect.any(Object));
    expect(allow.anArray(anArrayOfObjects, 1)).toEqual(expect.any(Object));
    expect(allow.anArray(anArrayOfPeople, 1)).toEqual(expect.any(Object));
+   expect(allow.anArray(anArrayOfReactElements, 1)).toEqual(expect.any(Object));
    expect(allow.anArray(anArrayOfStrings, 1)).toEqual(expect.any(Object));
 });
 
@@ -199,6 +217,7 @@ test('anArray() should pass when checking arrays greater than a minimum length a
    expect(allow.anArray(anArrayOfNumbers, 1, 50)).toEqual(expect.any(Object));
    expect(allow.anArray(anArrayOfObjects, 1, 50)).toEqual(expect.any(Object));
    expect(allow.anArray(anArrayOfPeople, 1, 50)).toEqual(expect.any(Object));
+   expect(allow.anArray(anArrayOfReactElements, 1, 50)).toEqual(expect.any(Object));
    expect(allow.anArray(anArrayOfStrings, 1, 50)).toEqual(expect.any(Object));
 });
 
@@ -209,6 +228,7 @@ test('anArray() should throw an error when checking arrays that are outside the 
    expect(() => allow.anArray(anArrayOfNumbers, 20, 50)).toThrow();
    expect(() => allow.anArray(anArrayOfObjects, 20, 50)).toThrow();
    expect(() => allow.anArray(anArrayOfPeople, 20, 50)).toThrow();
+   expect(() => allow.anArray(anArrayOfReactElements, 20, 50)).toThrow();
    expect(() => allow.anArray(anArrayOfStrings, 20, 50)).toThrow();
    expect(() => allow.anArray(anEmptyArray, 20, 50)).toThrow();
 });
@@ -229,6 +249,7 @@ test('anArray() should throw an error when checking anything other than an array
    expect(() => allow.anArray(anUndefined)).toThrow();
    expect(() => allow.anArray(aPi)).toThrow();
    expect(() => allow.anArray(aPopulatedObject)).toThrow();
+   expect(() => allow.anArray(aReactElement)).toThrow();
    expect(() => allow.anArray(aTrue)).toThrow();
    expect(() => allow.anArray(aTrueString)).toThrow();
 });
@@ -269,6 +290,7 @@ test('anArrayOfArrays() should throw an error when checking anything other than 
    expect(() => allow.anArrayOfArrays(anArrayOfNumbers)).toThrow();
    expect(() => allow.anArrayOfArrays(anArrayOfObjects)).toThrow();
    expect(() => allow.anArrayOfArrays(anArrayOfPeople)).toThrow();
+   expect(() => allow.anArrayOfArrays(anArrayOfReactElements)).toThrow();
    expect(() => allow.anArrayOfArrays(anArrayOfStrings)).toThrow();
    expect(() => allow.anArrayOfArrays(aNegative1)).toThrow();
    expect(() => allow.anArrayOfArrays(aNegativePi)).toThrow();
@@ -281,6 +303,7 @@ test('anArrayOfArrays() should throw an error when checking anything other than 
    expect(() => allow.anArrayOfArrays(anUndefined)).toThrow();
    expect(() => allow.anArrayOfArrays(aPi)).toThrow();
    expect(() => allow.anArrayOfArrays(aPopulatedObject)).toThrow();
+   expect(() => allow.anArrayOfArrays(aReactElement)).toThrow();
    expect(() => allow.anArrayOfArrays(aTrue)).toThrow();
    expect(() => allow.anArrayOfArrays(aTrueString)).toThrow();
 });
@@ -334,6 +357,7 @@ test('anArrayOfInstances() should throw an error when checking anything other th
    expect(() => allow.anArrayOfInstances(anArrayOfMixedTypes, person)).toThrow();
    expect(() => allow.anArrayOfInstances(anArrayOfNumbers, person)).toThrow();
    expect(() => allow.anArrayOfInstances(anArrayOfObjects, person)).toThrow();
+   expect(() => allow.anArrayOfInstances(anArrayOfReactElements, person)).toThrow();
    expect(() => allow.anArrayOfInstances(anArrayOfStrings, person)).toThrow();
    expect(() => allow.anArrayOfInstances(aNegative1, person)).toThrow();
    expect(() => allow.anArrayOfInstances(aNegativePi, person)).toThrow();
@@ -346,6 +370,7 @@ test('anArrayOfInstances() should throw an error when checking anything other th
    expect(() => allow.anArrayOfInstances(anUndefined, person)).toThrow();
    expect(() => allow.anArrayOfInstances(aPi, person)).toThrow();
    expect(() => allow.anArrayOfInstances(aPopulatedObject, person)).toThrow();
+   expect(() => allow.anArrayOfInstances(aReactElement, person)).toThrow();
    expect(() => allow.anArrayOfInstances(aTrue, person)).toThrow();
    expect(() => allow.anArrayOfInstances(aTrueString, person)).toThrow();
 });
@@ -386,6 +411,7 @@ test('anArrayOfIntegers() should throw an error when checking anything other tha
    expect(() => allow.anArrayOfIntegers(anArrayOfNumbers)).toThrow();
    expect(() => allow.anArrayOfIntegers(anArrayOfObjects)).toThrow();
    expect(() => allow.anArrayOfIntegers(anArrayOfPeople)).toThrow();
+   expect(() => allow.anArrayOfIntegers(anArrayOfReactElements)).toThrow();
    expect(() => allow.anArrayOfIntegers(anArrayOfStrings)).toThrow();
    expect(() => allow.anArrayOfIntegers(aNegative1)).toThrow();
    expect(() => allow.anArrayOfIntegers(aNegativePi)).toThrow();
@@ -398,6 +424,7 @@ test('anArrayOfIntegers() should throw an error when checking anything other tha
    expect(() => allow.anArrayOfIntegers(anUndefined)).toThrow();
    expect(() => allow.anArrayOfIntegers(aPi)).toThrow();
    expect(() => allow.anArrayOfIntegers(aPopulatedObject)).toThrow();
+   expect(() => allow.anArrayOfIntegers(aReactElement)).toThrow();
    expect(() => allow.anArrayOfIntegers(aTrue)).toThrow();
    expect(() => allow.anArrayOfIntegers(aTrueString)).toThrow();
 });
@@ -438,6 +465,7 @@ test('anArrayOfNumbers() should throw an error when checking anything other than
    expect(() => allow.anArrayOfNumbers(anArrayOfMixedTypes)).toThrow();
    expect(() => allow.anArrayOfNumbers(anArrayOfObjects)).toThrow();
    expect(() => allow.anArrayOfNumbers(anArrayOfPeople)).toThrow();
+   expect(() => allow.anArrayOfNumbers(anArrayOfReactElements)).toThrow();
    expect(() => allow.anArrayOfNumbers(anArrayOfStrings)).toThrow();
    expect(() => allow.anArrayOfNumbers(aNegative1)).toThrow();
    expect(() => allow.anArrayOfNumbers(aNegativePi)).toThrow();
@@ -450,6 +478,7 @@ test('anArrayOfNumbers() should throw an error when checking anything other than
    expect(() => allow.anArrayOfNumbers(anUndefined)).toThrow();
    expect(() => allow.anArrayOfNumbers(aPi)).toThrow();
    expect(() => allow.anArrayOfNumbers(aPopulatedObject)).toThrow();
+   expect(() => allow.anArrayOfNumbers(aReactElement)).toThrow();
    expect(() => allow.anArrayOfNumbers(aTrue)).toThrow();
    expect(() => allow.anArrayOfNumbers(aTrueString)).toThrow();
 });
@@ -490,6 +519,7 @@ test('anArrayOfObjects() should throw an error when checking anything other than
    expect(() => allow.anArrayOfObjects(anArrayOfIntegers)).toThrow();
    expect(() => allow.anArrayOfObjects(anArrayOfMixedTypes)).toThrow();
    expect(() => allow.anArrayOfObjects(anArrayOfNumbers)).toThrow();
+   expect(() => allow.anArrayOfObjects(anArrayOfReactElements)).toThrow();
    expect(() => allow.anArrayOfObjects(anArrayOfStrings)).toThrow();
    expect(() => allow.anArrayOfObjects(aNegative1)).toThrow();
    expect(() => allow.anArrayOfObjects(aNegativePi)).toThrow();
@@ -502,8 +532,62 @@ test('anArrayOfObjects() should throw an error when checking anything other than
    expect(() => allow.anArrayOfObjects(anUndefined)).toThrow();
    expect(() => allow.anArrayOfObjects(aPi)).toThrow();
    expect(() => allow.anArrayOfObjects(aPopulatedObject)).toThrow();
+   expect(() => allow.anArrayOfObjects(aReactElement)).toThrow();
    expect(() => allow.anArrayOfObjects(aTrue)).toThrow();
    expect(() => allow.anArrayOfObjects(aTrueString)).toThrow();
+});
+
+// anArrayOfReactElements()
+
+test('anArrayOfReactElements() should pass when checking any array-of-react-elements', () => {
+   expect(allow.anArrayOfReactElements(anArrayOfReactElements)).toEqual(expect.any(Object));
+   expect(allow.anArrayOfReactElements(anEmptyArray)).toEqual(expect.any(Object));
+});
+
+test('after setting allowNull to TRUE, anArrayOfReactElements() should pass when checking a NULL value', () => {
+   allow.setAllowNull(true);
+   expect(allow.anArrayOfReactElements(aNull)).toEqual(expect.any(Object));
+   allow.setAllowNull(false);
+});
+
+test('anArrayOfReactElements() should pass when checking arrays-of-react-elements that meet a minimum length', () => {
+   expect(allow.anArrayOfReactElements(anArrayOfReactElements, 1)).toEqual(expect.any(Object));
+});
+
+test('anArrayOfReactElements() should pass when checking arrays-of-react-elements longer than a minimum length and shorter than a maximum length', () => {
+   expect(allow.anArrayOfReactElements(anArrayOfReactElements, 1, 50)).toEqual(expect.any(Object));
+});
+
+test('anArrayOfReactElements() should throw an error when checking arrays-of-react-elements that are outside the required length limits', () => {
+   expect(() => allow.anArrayOfReactElements(anEmptyArray, 20, 50)).toThrow();
+   expect(() => allow.anArrayOfReactElements(anArrayOfReactElements, 20, 50)).toThrow();
+});
+
+test('anArrayOfReactElements() should throw an error when checking anything other than an array-of-objects', () => {
+   expect(() => allow.anArrayOfReactElements(aFalse)).toThrow();
+   expect(() => allow.anArrayOfReactElements(aFalseString)).toThrow();
+   expect(() => allow.anArrayOfReactElements(aFunction)).toThrow();
+   expect(() => allow.anArrayOfReactElements(anAlphabetString)).toThrow();
+   expect(() => allow.anArrayOfReactElements(anArrayOfArrays)).toThrow();
+   expect(() => allow.anArrayOfReactElements(anArrayOfIntegers)).toThrow();
+   expect(() => allow.anArrayOfReactElements(anArrayOfMixedTypes)).toThrow();
+   expect(() => allow.anArrayOfReactElements(anArrayOfNumbers)).toThrow();
+   expect(() => allow.anArrayOfReactElements(anArrayOfObjects)).toThrow();
+   expect(() => allow.anArrayOfReactElements(anArrayOfStrings)).toThrow();
+   expect(() => allow.anArrayOfReactElements(aNegative1)).toThrow();
+   expect(() => allow.anArrayOfReactElements(aNegativePi)).toThrow();
+   expect(() => allow.anArrayOfReactElements(anEmptyObject)).toThrow();
+   expect(() => allow.anArrayOfReactElements(anEmptyString)).toThrow();
+   expect(() => allow.anArrayOfReactElements(aNull)).toThrow();
+   expect(() => allow.anArrayOfReactElements(aNumber0)).toThrow();
+   expect(() => allow.anArrayOfReactElements(aNumber1)).toThrow();
+   expect(() => allow.anArrayOfReactElements(aNumber1WithDecimals)).toThrow();
+   expect(() => allow.anArrayOfReactElements(anUndefined)).toThrow();
+   expect(() => allow.anArrayOfReactElements(aPi)).toThrow();
+   expect(() => allow.anArrayOfReactElements(aPopulatedObject)).toThrow();
+   expect(() => allow.anArrayOfReactElements(aReactElement)).toThrow();
+   expect(() => allow.anArrayOfReactElements(aTrue)).toThrow();
+   expect(() => allow.anArrayOfReactElements(aTrueString)).toThrow();
 });
 
 // anArrayOfStrings()
@@ -543,6 +627,7 @@ test('anArrayOfStrings() should throw an error when checking anything other than
    expect(() => allow.anArrayOfStrings(anArrayOfNumbers)).toThrow();
    expect(() => allow.anArrayOfStrings(anArrayOfObjects)).toThrow();
    expect(() => allow.anArrayOfStrings(anArrayOfPeople)).toThrow();
+   expect(() => allow.anArrayOfStrings(anArrayOfReactElements)).toThrow();
    expect(() => allow.anArrayOfStrings(aNegative1)).toThrow();
    expect(() => allow.anArrayOfStrings(aNegativePi)).toThrow();
    expect(() => allow.anArrayOfStrings(anEmptyObject)).toThrow();
@@ -554,6 +639,7 @@ test('anArrayOfStrings() should throw an error when checking anything other than
    expect(() => allow.anArrayOfStrings(anUndefined)).toThrow();
    expect(() => allow.anArrayOfStrings(aPi)).toThrow();
    expect(() => allow.anArrayOfStrings(aPopulatedObject)).toThrow();
+   expect(() => allow.anArrayOfStrings(aReactElement)).toThrow();
    expect(() => allow.anArrayOfStrings(aTrue)).toThrow();
    expect(() => allow.anArrayOfStrings(aTrueString)).toThrow();
 });
@@ -602,6 +688,7 @@ test('anInstanceOf() should throw an error when checking anything other than an 
    expect(() => allow.anInstanceOf(anArrayOfNumbers, person)).toThrow();
    expect(() => allow.anInstanceOf(anArrayOfObjects, person)).toThrow();
    expect(() => allow.anInstanceOf(anArrayOfPeople, person)).toThrow();
+   expect(() => allow.anInstanceOf(anArrayOfReactElements, person)).toThrow();
    expect(() => allow.anInstanceOf(anArrayOfStrings, person)).toThrow();
    expect(() => allow.anInstanceOf(aNegative1, person)).toThrow();
    expect(() => allow.anInstanceOf(aNegativePi, person)).toThrow();
@@ -615,6 +702,7 @@ test('anInstanceOf() should throw an error when checking anything other than an 
    expect(() => allow.anInstanceOf(anUndefined, person)).toThrow();
    expect(() => allow.anInstanceOf(aPi, person)).toThrow();
    expect(() => allow.anInstanceOf(aPopulatedObject, person)).toThrow();
+   expect(() => allow.anInstanceOf(aReactElement, person)).toThrow();
    expect(() => allow.anInstanceOf(aTrue, person)).toThrow();
    expect(() => allow.anInstanceOf(aTrueString, person)).toThrow();
 });
@@ -666,6 +754,7 @@ test('anInteger() should throw an error when checking anything other than an int
    expect(() => allow.anInteger(anArrayOfNumbers)).toThrow();
    expect(() => allow.anInteger(anArrayOfObjects)).toThrow();
    expect(() => allow.anInteger(anArrayOfPeople)).toThrow();
+   expect(() => allow.anInteger(anArrayOfReactElements)).toThrow();
    expect(() => allow.anInteger(anArrayOfStrings)).toThrow();
    expect(() => allow.anInteger(aNegativePi)).toThrow();
    expect(() => allow.anInteger(anEmptyArray)).toThrow();
@@ -675,6 +764,7 @@ test('anInteger() should throw an error when checking anything other than an int
    expect(() => allow.anInteger(anUndefined)).toThrow();
    expect(() => allow.anInteger(aPi)).toThrow();
    expect(() => allow.anInteger(aPopulatedObject)).toThrow();
+   expect(() => allow.anInteger(aReactElement)).toThrow();
    expect(() => allow.anInteger(aTrue)).toThrow();
    expect(() => allow.anInteger(aTrueString)).toThrow();
 });
@@ -713,7 +803,7 @@ test('anObject() should throw an error when checking objects that are outside th
    expect(() => allow.anObject(aPopulatedObject, 20, 50)).toThrow();
 });
 
-test('anObject() should throw an error when checking anything other than an integer', () => {
+test('anObject() should throw an error when checking anything other than an object', () => {
    expect(() => allow.anObject(aFalse)).toThrow();
    expect(() => allow.anObject(aFalseString)).toThrow();
    expect(() => allow.anObject(aFunction)).toThrow();
@@ -724,6 +814,7 @@ test('anObject() should throw an error when checking anything other than an inte
    expect(() => allow.anObject(anArrayOfNumbers)).toThrow();
    expect(() => allow.anObject(anArrayOfObjects)).toThrow();
    expect(() => allow.anObject(anArrayOfPeople)).toThrow();
+   expect(() => allow.anObject(anArrayOfReactElements)).toThrow();
    expect(() => allow.anObject(anArrayOfStrings)).toThrow();
    expect(() => allow.anObject(aNegative1)).toThrow();
    expect(() => allow.anObject(aNegativePi)).toThrow();
@@ -735,6 +826,7 @@ test('anObject() should throw an error when checking anything other than an inte
    expect(() => allow.anObject(aNumber1WithDecimals)).toThrow();
    expect(() => allow.anObject(anUndefined)).toThrow();
    expect(() => allow.anObject(aPi)).toThrow();
+   expect(() => allow.anObject(aReactElement)).toThrow();
    expect(() => allow.anObject(aTrue)).toThrow();
    expect(() => allow.anObject(aTrueString)).toThrow();
 });
@@ -794,6 +886,7 @@ test('aNumber() should throw an error when checking anything other than a number
    expect(() => allow.aNumber(anArrayOfNumbers)).toThrow();
    expect(() => allow.aNumber(anArrayOfObjects)).toThrow();
    expect(() => allow.aNumber(anArrayOfPeople)).toThrow();
+   expect(() => allow.aNumber(anArrayOfReactElements)).toThrow();
    expect(() => allow.aNumber(anArrayOfStrings)).toThrow();
    expect(() => allow.aNumber(anEmptyArray)).toThrow();
    expect(() => allow.aNumber(anEmptyObject)).toThrow();
@@ -801,8 +894,49 @@ test('aNumber() should throw an error when checking anything other than a number
    expect(() => allow.aNumber(aNull)).toThrow();
    expect(() => allow.aNumber(anUndefined)).toThrow();
    expect(() => allow.aNumber(aPopulatedObject)).toThrow();
+   expect(() => allow.aNumber(aReactElement)).toThrow();
    expect(() => allow.aNumber(aTrue)).toThrow();
    expect(() => allow.aNumber(aTrueString)).toThrow();
+});
+
+// aReactElement()
+
+test('aReactElement() should pass when checking any React element', () => {
+   expect(allow.aReactElement(aReactElement)).toEqual(expect.any(Object));
+});
+
+test('after setting allowNull to TRUE, aReactElement() should pass when checking a NULL value', () => {
+   allow.setAllowNull(true);
+   expect(allow.aReactElement(aNull)).toEqual(expect.any(Object));
+   allow.setAllowNull(false);
+});
+
+test('aReactElement() should throw an error when checking anything other than a React element', () => {
+   expect(() => allow.aReactElement(aFalse)).toThrow();
+   expect(() => allow.aReactElement(aFalseString)).toThrow();
+   expect(() => allow.aReactElement(aFunction)).toThrow();
+   expect(() => allow.aReactElement(anAlphabetString)).toThrow();
+   expect(() => allow.aReactElement(anArrayOfArrays)).toThrow();
+   expect(() => allow.aReactElement(anArrayOfIntegers)).toThrow();
+   expect(() => allow.aReactElement(anArrayOfMixedTypes)).toThrow();
+   expect(() => allow.aReactElement(anArrayOfNumbers)).toThrow();
+   expect(() => allow.aReactElement(anArrayOfObjects)).toThrow();
+   expect(() => allow.aReactElement(anArrayOfPeople)).toThrow();
+   expect(() => allow.aReactElement(anArrayOfReactElements)).toThrow();
+   expect(() => allow.aReactElement(anArrayOfStrings)).toThrow();
+   expect(() => allow.aReactElement(aNegative1)).toThrow();
+   expect(() => allow.aReactElement(aNegativePi)).toThrow();
+   expect(() => allow.aReactElement(anEmptyArray)).toThrow();
+   expect(() => allow.aReactElement(anEmptyString)).toThrow();
+   expect(() => allow.aReactElement(aNull)).toThrow();
+   expect(() => allow.aReactElement(aNumber0)).toThrow();
+   expect(() => allow.aReactElement(aNumber1)).toThrow();
+   expect(() => allow.aReactElement(aNumber1WithDecimals)).toThrow();
+   expect(() => allow.aReactElement(anUndefined)).toThrow();
+   expect(() => allow.aReactElement(aPi)).toThrow();
+   expect(() => allow.aReactElement(aPopulatedObject)).toThrow();
+   expect(() => allow.aReactElement(aTrue)).toThrow();
+   expect(() => allow.aReactElement(aTrueString)).toThrow();
 });
 
 // aString()
@@ -848,6 +982,7 @@ test('aString() should throw an error when checking anything other than a string
    expect(() => allow.aString(anArrayOfNumbers)).toThrow();
    expect(() => allow.aString(anArrayOfObjects)).toThrow();
    expect(() => allow.aString(anArrayOfPeople)).toThrow();
+   expect(() => allow.aString(anArrayOfReactElements)).toThrow();
    expect(() => allow.aString(anArrayOfStrings)).toThrow();
    expect(() => allow.aString(aNegative1)).toThrow();
    expect(() => allow.aString(aNegativePi)).toThrow();
@@ -860,6 +995,7 @@ test('aString() should throw an error when checking anything other than a string
    expect(() => allow.aString(anUndefined)).toThrow();
    expect(() => allow.aString(aPi)).toThrow();
    expect(() => allow.aString(aPopulatedObject)).toThrow();
+   expect(() => allow.aString(aReactElement)).toThrow();
    expect(() => allow.aString(aTrue)).toThrow();
 });
 
@@ -900,10 +1036,11 @@ test('after setting allowNull to TRUE, oneOf() should pass when checking a NULL 
    allow.setAllowNull(false);
 });
 
-test('oneOf() should throw an error when checking a value that is an object, an array, or a function', () => {
+test('oneOf() should throw an error when checking a value that is an object, an array, a function, or a React element', () => {
    expect(() => allow.oneOf(anArrayOfNumbers, anArrayOfIntegers)).toThrow();
    expect(() => allow.oneOf(aPopulatedObject, anArrayOfObjects)).toThrow();
    expect(() => allow.oneOf(aFunction, anArrayOfIntegers)).toThrow();
+   expect(() => allow.oneOf(aReactElement, anArrayOfIntegers)).toThrow();
 });
 
 test('oneOf() should throw an error when checking any value that does not exist in the allowedValues array', () => {
