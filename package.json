@@ -1,0 +1,52 @@
+{
+  "name": "@toolz/allow-react",
+  "version": "0.0.1",
+  "description": "Extends @toolz/allow to provide validation of React elements",
+  "keywords": [
+    "data type",
+    "inputs",
+    "interfaces",
+    "javascript",
+    "react",
+    "runtime",
+    "unit testing",
+    "validation"
+  ],
+  "homepage": "https://github.com/bytebodger/allow-react",
+  "bugs": {
+    "email": "adam.davis@hashverify.com",
+    "url": "https://github.com/bytebodger/allow-react/issues"
+  },
+  "main": "src/allow.js",
+  "scripts": {
+    "local": "nodemon --experimental-modules --es-module-specifier-resolution=node src/allow.js",
+    "start": "node --experimental-modules --es-module-specifier-resolution=node src/allow.js",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bytebodger/allow-react.git"
+  },
+  "author": "Adam Nathaniel Davis <adam.davis@hashverify.com> (https://writing.voyage)",
+  "license": "MIT",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/node": "^7.10.5",
+    "@babel/preset-env": "^7.11.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "jest": "^26.6.3",
+    "jest-matcher-one-of": "^1.0.2",
+    "nodemon": "^2.0.4"
+  },
+  "browserslist": [
+    "last 1 chrome version",
+    "last 1 firefox version",
+    "last 1 safari version",
+    "last 1 ie version"
+  ]
+}
