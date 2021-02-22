@@ -1,0 +1,63 @@
+{
+  "name": "@toolz/allow-react",
+  "version": "0.0.1",
+  "description": "Extends @toolz/allow to provide validation of React elements",
+  "keywords": [
+    "data type",
+    "inputs",
+    "interfaces",
+    "javascript",
+    "react",
+    "runtime",
+    "unit testing",
+    "validation"
+  ],
+  "homepage": "https://github.com/bytebodger/allow-react",
+  "bugs": {
+    "email": "adam.davis@hashverify.com",
+    "url": "https://github.com/bytebodger/allow-react/issues"
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.5",
+    "@testing-library/user-event": "^12.7.2",
+    "@toolz/allow": "^1.0.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-scripts": "4.0.2",
+    "web-vitals": "^1.1.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!@toolz/allow)/\" --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": [
+    "last 1 chrome version",
+    "last 1 firefox version",
+    "last 1 safari version",
+    "last 1 ie version"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bytebodger/allow-react.git"
+  },
+  "author": "Adam Nathaniel Davis <adam.davis@hashverify.com> (https://writing.voyage)",
+  "license": "MIT",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.12.13",
+    "babel-jest": "^26.6.3",
+    "jest-matcher-one-of": "^1.0.2"
+  }
+}
