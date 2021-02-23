@@ -1,6 +1,6 @@
 {
   "name": "@toolz/allow-react",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Extends @toolz/allow to provide validation of React elements",
   "keywords": [
     "data type",
@@ -31,7 +31,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!@toolz/allow)/\" --env=jsdom",
+    "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!@toolz/allow-react)/\" --env=jsdom",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
