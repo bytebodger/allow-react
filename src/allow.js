@@ -85,7 +85,6 @@ const Allow = () => {
       aNumber: core.aNumber,
       aReactElement,
       aString: core.aString,
-      failureBehaviorOptions: core.failureBehaviorOptions,
       getAllowNull: core.getAllowNull,
       getFailureBehavior: core.getFailureBehavior,
       getOnFailure: core.getOnFailure,

@@ -1,6 +1,6 @@
 {
   "name": "@toolz/allow-react",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Extends @toolz/allow to provide validation of React elements",
   "keywords": [
     "data type",
@@ -22,7 +22,7 @@
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.7.2",
-    "@toolz/allow": "^1.0.6",
+    "@toolz/allow": "^1.0.7",
     "@toolz/is-a-regular-object-react": "^1.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
