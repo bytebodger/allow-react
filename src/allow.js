@@ -1,6 +1,8 @@
-import { allow as core } from '@toolz/allow';
+import { allow as core, failureBehavior as coreFailureBehavior } from '@toolz/allow';
 import React from 'react';
 import { isARegularObject } from '@toolz/is-a-regular-object-react';
+
+export const failureBehavior = coreFailureBehavior;
 
 const Allow = () => {
    const anArrayOfObjects = (value, minLength = 0, maxLength = Number.MAX_SAFE_INTEGER) => {
