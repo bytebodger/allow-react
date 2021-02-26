@@ -1,8 +1,6 @@
-import { allow as core, failureBehavior as coreFailureBehavior } from '@toolz/allow';
+import { allow as core } from '@toolz/allow';
 import React from 'react';
 import { isARegularObject } from '@toolz/is-a-regular-object-react';
-
-export const failureBehavior = coreFailureBehavior;
 
 const Allow = () => {
    const anArrayOfObjects = (value, minLength = 0, maxLength = Number.MAX_SAFE_INTEGER) => {
@@ -46,8 +44,14 @@ const Allow = () => {
       return allow;
    };
    
+   const failureBehavior = {
+      IGNORE: 'ignore',
+      THROW: 'throw',
+      WARN: 'warn',
+   };
+   
    const is = {not: {negative: 0}};
-
+   
    const oneOf = (value, allowedValues) => {
       if (core.getAllowNull() && value === null)
          return allow;
@@ -87,6 +91,7 @@ const Allow = () => {
       aNumber: core.aNumber,
       aReactElement,
       aString: core.aString,
+      failureBehavior,
       getAllowNull: core.getAllowNull,
       getFailureBehavior: core.getFailureBehavior,
       getOnFailure: core.getOnFailure,
