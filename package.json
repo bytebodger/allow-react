@@ -1,6 +1,6 @@
 {
   "name": "@toolz/allow-react",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Extends @toolz/allow to provide validation of React elements",
   "keywords": [
     "data type",
@@ -17,6 +17,7 @@
     "email": "adam.davis@hashverify.com",
     "url": "https://github.com/bytebodger/allow-react/issues"
   },
+  "main": "src/allow.js",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
