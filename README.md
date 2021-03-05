@@ -643,13 +643,15 @@ allow.anArray(thisIsNull); // this does NOT throw an Error
    setAllowNull() requires a Boolean as its only argument. By default, the
    values checked in by the allow methods are not nullable. But this behavior
    can be toggled with setAllowNull(). 
+   If localStorage is available, the allowNull value will be set there.
+   This allows the setting to be saved once in the lifecycle of the app.
  */
 ```
 
 ### .setFailureBehavior()
 
 ```javascript
-allow.setFailureBehavior('warn');
+allow.setFailureBehavior(allow.failureBehavior.WARN);
 /*
    setFailureBehavior() requires one of the following three values:
       'throw'
@@ -659,6 +661,8 @@ allow.setFailureBehavior('warn');
    execution.  
    'warn' will spawn warnings to be displayed in the console.
    'ignore' will turn off all warnings and cease the throwing of all Errors.
+   If localStorage is available, the failureBehavior value will be set there.
+   This allows the setting to be saved once in the lifecycle of the app.
  */
 ```
 
@@ -669,7 +673,7 @@ const myCustomErrorHandler = (value, message) => {
    // do the custom error handling...
 }
 
-allow.setFailureBehavior('ignore');
+allow.setFailureBehavior(allow.failureBehavior.IGNORE);
 allow.setOnFailure(myCustomErrorHandler);
 /*
    The onFailure handler is called before any warning is displayed and before
